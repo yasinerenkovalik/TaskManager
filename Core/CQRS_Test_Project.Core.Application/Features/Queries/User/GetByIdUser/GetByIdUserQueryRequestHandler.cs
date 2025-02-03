@@ -1,39 +1,46 @@
-﻿using CQRS_Test_Project.Core.Application.Wrappers;
+﻿using AutoMapper;
+using CQRS_Test_Project.Core.Application.Wrappers;
 using MediatR;
+using CQRS_Test_Project.Core.Application.Interface.Repository;
 
 namespace CQRS_Test_Project.Core.Application.Features.Queries.User.GetByIdUser
 {
     public class GetByIdUserQueryRequestHandler : IRequestHandler<GetByIdUserQueryRequest,
        GeneralResponse<GetByIdUserQueryResponse>>
     {
+        private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
+
+        public GetByIdUserQueryRequestHandler(IUserRepository userRepository, IMapper mapper)
+        {
+            _userRepository = userRepository;
+            _mapper = mapper;
+        }
 
         public async Task<GeneralResponse<GetByIdUserQueryResponse>> Handle(GetByIdUserQueryRequest request, CancellationToken cancellationToken)
         {
+            // Repository'den kullanıcıyı getir
+            var userEntity = await _userRepository.GetByIdAsync(request.Id);
 
-            var getByIdUserQueryResponse = new GetByIdUserQueryResponse
+            if (userEntity == null)
             {
-                Id = Guid.NewGuid(),
-                Age = Random.Shared.Next(0, 100),
-                CreatedAt = DateTime.UtcNow.AddDays(-3),
-                UpdatedAt = null,
-                DeletedAt = null,
-                Name = "Mahmut",
-                Surname = "Taş",
-                Username = "Mahmuttas11"
-            };
+                return new GeneralResponse<GetByIdUserQueryResponse>
+                {
+                    Data = null,
+                    Errors = new List<string> { "Kullanıcı bulunamadı." },
+                    isSuccess = false
+                };
+            }
 
+            // AutoMapper ile kullanıcı verisini response modeline map et
+            var getByIdUserQueryResponse = _mapper.Map<GetByIdUserQueryResponse>(userEntity);
 
-            var generalResponse = new GeneralResponse<GetByIdUserQueryResponse>
+            return new GeneralResponse<GetByIdUserQueryResponse>
             {
                 Data = getByIdUserQueryResponse,
                 Errors = null,
                 isSuccess = true
             };
-
-            return generalResponse;
-
-
         }
-
     }
 }
