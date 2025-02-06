@@ -22,10 +22,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommandRequest request)
         {
-            if (ModelState.IsValid)
-            {
-
-            }
+          
             var result = await _mediator.Send(request);
 
             return Ok(result);

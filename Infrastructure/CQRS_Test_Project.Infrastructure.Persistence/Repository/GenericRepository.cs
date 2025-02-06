@@ -18,6 +18,7 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Repository
         }
         public async Task<T> AddAsync(T entity)
         {
+            entity.CreatedAt = DateTime.UtcNow;
             await _appContext.Set<T>().AddAsync(entity);
             await _appContext.SaveChangesAsync();
      
@@ -34,7 +35,12 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Repository
                 throw new Exception("Kayıt bulunamadı.");
             }
 
-            _appContext.Set<T>().Remove(entity); 
+            entity.Activate = false;
+            
+            entity.DeletedAt = DateTime.UtcNow;
+            
+            _appContext.Set<T>().Update(entity);
+           
             await _appContext.SaveChangesAsync();
 
             return entity;
@@ -44,7 +50,6 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Repository
 
         public async Task<List<T>> GetAllAysnc()
         {
-
             return await _appContext.Set<T>().Where(x=>x.Activate==true).ToListAsync();
         }
 
@@ -55,9 +60,12 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Repository
 
         public async Task<T> UpdateAsync(T entity)
         {
+            entity.UpdatedAt = DateTime.UtcNow;
+            
             _appContext.Set<T>().Update(entity);
+            
             await _appContext.SaveChangesAsync();
-
+            
             return entity;
         }
     }
