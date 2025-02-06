@@ -1,6 +1,7 @@
 using CQRS_Test_Project.Core.Application;
 using CQRS_Test_Project.Core.Application.Interface.Repository;
 using CQRS_Test_Project.Core.Application.Validations.User;
+using CQRS_Test_Project.Infrastructure.Persistence;
 using CQRS_Test_Project.Infrastructure.Persistence.Context;
 using CQRS_Test_Project.Infrastructure.Persistence.Repository;
 using FluentValidation.AspNetCore;
@@ -13,8 +14,8 @@ builder.Services.AddControllers().AddFluentValidation(conf=>conf.RegisterValidat
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddPersistanceLayerServices();
 builder.Services.AddAplicationLayerServices();
 builder.Services.AddDbContext<CqrsContext>();
 

@@ -27,7 +27,7 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Repository
         public async Task<T> DeleteAsync(Guid id)
         {
 
-            var entity = await _appContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            var entity = await _appContext.Set<T>().FirstOrDefaultAsync(x => x.BaseID == id);
 
             if (entity == null)
             {
@@ -45,12 +45,12 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Repository
         public async Task<List<T>> GetAllAysnc()
         {
 
-            return await _appContext.Set<T>().ToListAsync();
+            return await _appContext.Set<T>().Where(x=>x.Activate==true).ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(Guid Id)
         {
-            return await _appContext.Set<T>().FirstOrDefaultAsync(x => x.Id == Id );
+            return await _appContext.Set<T>().FirstOrDefaultAsync(x => x.BaseID == Id );
         }
 
         public async Task<T> UpdateAsync(T entity)

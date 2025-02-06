@@ -43,12 +43,12 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.User.CreateUser
             await _userRepository.AddAsync(userEntity);
 
             // 4. Loglama yap
-            _logger.LogInformation("Yeni kullanıcı başarıyla eklendi: {UserId}", userEntity.Id);
+            _logger.LogInformation("Yeni kullanıcı başarıyla eklendi: {UserId}", userEntity.BaseID);
 
             // 5. Response oluştur ve dön
             return new CreateUserCommandResponse
             {
-                Id = userEntity.Id
+                Id = userEntity.BaseID
             };
         }
     }

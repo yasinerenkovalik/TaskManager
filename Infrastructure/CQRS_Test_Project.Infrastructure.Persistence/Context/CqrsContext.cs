@@ -1,11 +1,7 @@
 ﻿using CQRS_Test_Project.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using File = CQRS_Test_Project.Core.Domain.Entities.File;
+using Task = CQRS_Test_Project.Core.Domain.Entities.Task;
 
 namespace CQRS_Test_Project.Infrastructure.Persistence.Context
 {
@@ -13,10 +9,34 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=Cqrs;User Id=sa;Password=Yasin123!;TrustServerCertificate=True;");
+            optionsBuilder.UseNpgsql("Server=localhost;Database=cqrsProject;User Id=admin;Password=password;TrustServerCertificate=True;");
         }
 
-       
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // 'Guid' türlerini 'uuid' olarak tanımlıyoruz
+            modelBuilder.Entity<Task>()
+                .Property(t => t.BaseID);
+
+
+
+
+            // Diğer entity'ler için de aynı şeyi yapabilirsiniz
+        }
+
         public DbSet<User> Users { get; set; }
+        public DbSet<ActivityLog> ActivityLogs { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<File> Files { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<SubTask> SubTasks { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TaskTag> TaskTags { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<Workflow> Workflows { get; set; }
     }
 }

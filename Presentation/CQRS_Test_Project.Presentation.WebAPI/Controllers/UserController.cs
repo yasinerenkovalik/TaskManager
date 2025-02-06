@@ -12,7 +12,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class UserController : ControllerBase
     {
-        IMediator _mediator;
+        private  readonly IMediator _mediator;
 
         public UserController(IMediator mediator)
         {

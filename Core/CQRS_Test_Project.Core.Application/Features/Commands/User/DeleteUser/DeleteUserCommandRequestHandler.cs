@@ -29,13 +29,13 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.User.DeleteUser
                 };
             }
 
-            await _userRepository.DeleteAsync(user.Id);
+            await _userRepository.DeleteAsync(user.BaseID);
 
             return new GeneralResponse<DeleteUserCommandResponse>
             {
                 Data = new DeleteUserCommandResponse
                 {
-                    UserId = user.Id,
+                    UserId = user.BaseID,
                 },
                 Errors = null,
                 isSuccess = true
