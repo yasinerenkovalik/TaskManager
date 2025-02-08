@@ -18,6 +18,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddPersistanceLayerServices();
 builder.Services.AddAplicationLayerServices();
 builder.Services.AddDbContext<CqrsContext>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 
 var app = builder.Build();
 
@@ -29,7 +36,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll"); // CORS'u Aktif Et
 
+app.UseAuthorization();
 app.UseAuthorization();
 
 app.MapControllers();
