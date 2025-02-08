@@ -13,6 +13,7 @@ public static class ServiceRegistrations
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
+        services.AddScoped<ITaskRepository, TaskRepository>();
            
         return services;
 

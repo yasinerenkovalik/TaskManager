@@ -28,6 +28,17 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
             return Ok(result);
 
         }
+        [HttpPost]
+        public async Task<IActionResult> Login(string username,string password)
+        {
+          
+            if(username=="eren"&& password == "password")
+                return Ok("giriş başarılı");
+            return BadRequest("giriş başarısız");
+
+            
+
+        }
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateUserCommandRequest request)
         {
