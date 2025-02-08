@@ -2,5 +2,5 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.FeedBack.CreateFe
 
 public class CreateFeedBackCommandResponse
 {
-    
+    public string Message { get; set; }
 }

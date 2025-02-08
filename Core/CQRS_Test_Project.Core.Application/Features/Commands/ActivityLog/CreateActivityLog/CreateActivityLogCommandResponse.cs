@@ -2,5 +2,5 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.ActivityLog.Creat
 
 public class CreateActivityLogCommandResponse
 {
-    
+    public string Message { get; set; }
 }
