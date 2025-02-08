@@ -25,30 +25,4 @@
     <ProjectReference Include="..\CQRS_Test_Project.Core.Domain\CQRS_Test_Project.Core.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Commands\File\CreateFile\" />
-    <Folder Include="Features\Commands\File\DeleteFile\" />
-    <Folder Include="Features\Commands\File\UpdateFile\" />
-    <Folder Include="Features\Commands\Project\CreateProject\" />
-    <Folder Include="Features\Commands\Project\DeleteProject\" />
-    <Folder Include="Features\Commands\Project\UpdateProject\" />
-    <Folder Include="Features\Commands\SubTask\CreateSubTag\" />
-    <Folder Include="Features\Commands\SubTask\DeleteSubTag\" />
-    <Folder Include="Features\Commands\SubTask\UpdateSubTag\" />
-    <Folder Include="Features\Commands\Tag\CreateTag\" />
-    <Folder Include="Features\Commands\Tag\DeleteTag\" />
-    <Folder Include="Features\Commands\Tag\UpdateTag\" />
-    <Folder Include="Features\Commands\Task\DeleteTask\" />
-    <Folder Include="Features\Commands\Task\UpdateTask\" />
-    <Folder Include="Features\Commands\TeamMember\CreateTeamMember\" />
-    <Folder Include="Features\Commands\TeamMember\DeleteTeamMember\" />
-    <Folder Include="Features\Commands\TeamMember\UpdateTeamMember\" />
-    <Folder Include="Features\Commands\Team\CreateTeam\" />
-    <Folder Include="Features\Commands\Team\DeleteTeam\" />
-    <Folder Include="Features\Commands\Team\UpdateTeam\" />
-    <Folder Include="Features\Commands\WorkFlow\CreateWorkFlow\" />
-    <Folder Include="Features\Commands\WorkFlow\DeleteWorkFlow\" />
-    <Folder Include="Features\Commands\WorkFlow\UpdateWorkFlow\" />
-  </ItemGroup>
-
 </Project>
