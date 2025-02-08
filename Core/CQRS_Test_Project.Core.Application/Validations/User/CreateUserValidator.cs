@@ -14,9 +14,7 @@ namespace CQRS_Test_Project.Core.Application.Validations.User
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("İsim alanı boş olamaz.")
                 .Length(3, 50).WithMessage("İsim alanı 3 ile 50 karakter arasında olmalıdır."); ;
-               
-
-           
+            
         }
     }
 }
