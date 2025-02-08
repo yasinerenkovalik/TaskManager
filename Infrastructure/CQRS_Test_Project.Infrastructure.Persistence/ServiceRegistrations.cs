@@ -14,9 +14,15 @@ public static class ServiceRegistrations
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
         services.AddScoped<ITaskRepository, TaskRepository>();
+        services.AddScoped<IFeedBackRepository, FeedBackRepository>();
+        services.AddScoped<IFileRepository, FileRepository>();
+        services.AddScoped<IProjectRepository, ProjectRepository>();
+        services.AddScoped<ISubTaskRepository, SubTaskRepository>();
+        services.AddScoped<ITagRepository, TagRepository>();
+        services.AddScoped<ITeamRepository, TeamRepository>();
+        services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
+        services.AddScoped<IWorkflowRepository, WorkFlowRepository>();
            
         return services;
-
-        
     }
 }

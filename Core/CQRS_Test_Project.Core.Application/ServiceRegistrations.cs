@@ -18,7 +18,7 @@ namespace CQRS_Test_Project.Core.Application
 
             services.AddAutoMapper(currentAssembly);
 
-            services.AddScoped<IValidator<CreateUserCommandRequest>, CreateUserCommandRequestValidator>();
+            services.AddScoped<IValidator<CreateUserCommandRequest>, UserValidator>();
 
             
            

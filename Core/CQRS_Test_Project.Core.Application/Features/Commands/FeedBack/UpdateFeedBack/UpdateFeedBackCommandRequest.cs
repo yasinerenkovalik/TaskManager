@@ -2,5 +2,5 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.FeedBack.UpdateFe
 
 public class UpdateFeedBackCommandRequest
 {
-    
+    public Guid Id { get; set; }
 }
