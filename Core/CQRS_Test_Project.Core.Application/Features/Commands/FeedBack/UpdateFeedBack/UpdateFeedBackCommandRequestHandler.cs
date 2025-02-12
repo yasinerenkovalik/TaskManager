@@ -30,18 +30,29 @@ public class UpdateFeedBackCommandRequestHandler:IRequestHandler<UpdateFeedBackC
                 Errors = new List<string> {""+validationResult.Errors}
             };
         }
-        var updateFeedBackCommandResponse = _feedBackRepository.GetByIdAsync(request.Id);
-        if (updateFeedBackCommandResponse is null)
+        var user = await _feedBackRepository.GetByIdAsync(request.Id);
+        if (user is null)
         {
             return new GeneralResponse<UpdateFeedBackCommandResponse>
             {
-                Message = "FeedBack Bulunamadı"
+                Data = null,
+                Errors = new List<string> { "Kullanıcı bulunamadı." },
+                isSuccess = false
             };
         }
-        _feedBackRepository.DeleteAsync(request.Id);
+            
+        _mapper.Map(request, user);
+        await _feedBackRepository.UpdateAsync(user);
+
         return new GeneralResponse<UpdateFeedBackCommandResponse>
         {
-            Message = "FeedBack Başarıyla silindi!",
+            Data = new UpdateFeedBackCommandResponse
+            {
+                Message = "başarıyla güncellendi.",
+            },
+            Errors = null,
+            isSuccess = true
         };
+      
     }
 }

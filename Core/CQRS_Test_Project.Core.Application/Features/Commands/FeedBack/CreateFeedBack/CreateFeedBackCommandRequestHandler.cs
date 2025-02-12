@@ -38,6 +38,7 @@ public class CreateFeedBackCommandRequestHandler:IRequestHandler<CreateFeedBackC
         
         return new GeneralResponse<CreateFeedBackCommandResponse>()
         {
+            isSuccess = true,
             Errors = new List<string>{"başarıyla eklendi"}
         };
     }

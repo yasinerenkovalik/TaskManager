@@ -2,5 +2,5 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.FeedBack.DeleteFe
 
 public class DeleteFeedBackCommandResponse
 {
-    
+    public string Message { get; set; }
 }

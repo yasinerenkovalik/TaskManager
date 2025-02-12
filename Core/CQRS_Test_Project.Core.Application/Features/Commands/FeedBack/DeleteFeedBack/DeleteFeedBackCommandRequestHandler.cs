@@ -30,18 +30,28 @@ public class DeleteFeedBackCommandRequestHandler:IRequestHandler<DeleteFeedBackC
                 Errors = new List<string> {""+validationResult.Errors}
             };
         }
-        var deleteFeedBackCommandResponse = _feedBackRepository.GetByIdAsync(request.Id);
-        if (deleteFeedBackCommandResponse is null)
+        var feedback = await _feedBackRepository.GetByIdAsync(request.Id);
+
+        if (feedback == null)
         {
             return new GeneralResponse<DeleteFeedBackCommandResponse>
             {
-                Message = "FeedBack Bulunamadı"
+                Data = null,
+                Errors = new List<string> { "Feed Back bulunamadı." },
+                isSuccess = false
             };
         }
-        _feedBackRepository.DeleteAsync(request.Id);
+
+        await _feedBackRepository.DeleteAsync(feedback.BaseID);
+
         return new GeneralResponse<DeleteFeedBackCommandResponse>
         {
-            Message = "FeedBack Başarıyla silindi!",
+            Data = new DeleteFeedBackCommandResponse
+            {
+                Message = feedback.BaseID.ToString(),
+            },
+            Errors = null,
+            isSuccess = true
         };
         
     }

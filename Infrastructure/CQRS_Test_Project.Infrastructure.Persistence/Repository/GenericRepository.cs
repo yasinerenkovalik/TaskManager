@@ -19,6 +19,7 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Repository
         public async Task<T> AddAsync(T entity)
         {
             entity.CreatedAt = DateTime.UtcNow;
+            entity.Activate = true;
             await _appContext.Set<T>().AddAsync(entity);
             await _appContext.SaveChangesAsync();
      
