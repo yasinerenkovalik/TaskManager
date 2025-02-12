@@ -32,10 +32,28 @@ public class DeleteProjectCommandRequestHandler: IRequestHandler<DeleteProjectCo
             };
         }
        
-        _projectRepository.DeleteAsync(request.Id);
-        return new GeneralResponse<DeleteProjectCommandResponse>()
+        var user = await _projectRepository.GetByIdAsync(request.Id);
+
+        if (user == null)
         {
-            Message = "Project Deleted",
+            return new GeneralResponse<DeleteProjectCommandResponse>
+            {
+                Data = null,
+                Errors = new List<string> { "Kullanıcı bulunamadı." },
+                isSuccess = false
+            };
+        }
+
+        await _projectRepository.DeleteAsync(user.BaseID);
+
+        return new GeneralResponse<DeleteProjectCommandResponse>
+        {
+            Data = new DeleteProjectCommandResponse
+            {
+                UserID = user.BaseID,
+            },
+            Errors = null,
+            isSuccess = true
         };
     }
 }

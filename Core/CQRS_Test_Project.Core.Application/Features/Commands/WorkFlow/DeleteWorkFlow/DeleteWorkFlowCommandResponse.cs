@@ -2,5 +2,5 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.WorkFlow.DeleteWo
 
 public class DeleteWorkFlowCommandResponse
 {
-    
+    public string Message { get; set; }
 }

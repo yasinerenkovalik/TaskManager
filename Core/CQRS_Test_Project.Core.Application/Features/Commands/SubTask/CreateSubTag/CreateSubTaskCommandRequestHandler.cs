@@ -30,8 +30,11 @@ public class CreateSubTaskCommandRequestHandler:IRequestHandler<CreateSubTaskCom
                 Errors = new List<string> {""+validationResult.Errors}
             };
         }
+        
         var subTask = _mapper.Map<Domain.Entities.SubTask>(request);
-        _subTaskRepository.AddAsync(subTask);
+        
+        await _subTaskRepository.AddAsync(subTask);
+        
         return new GeneralResponse<CreateSubTaskCommandResponse>()
         {
             Message = "Success",

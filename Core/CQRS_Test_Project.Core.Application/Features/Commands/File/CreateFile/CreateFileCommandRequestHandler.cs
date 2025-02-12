@@ -32,9 +32,9 @@ public class CreateFileCommandRequestHandler:IRequestHandler<CreateFileCommandRe
                 Errors = new List<string> {""+validationResult.Errors}
             };
         }
-        var feedBack = _mapper.Map<Domain.Entities.File>(request);
+        var file = _mapper.Map<Domain.Entities.File>(request);
         
-        _fileRepository.AddAsync(feedBack);
+        _fileRepository.AddAsync(file);
         
         return new GeneralResponse<CreateFileCommandResponse>()
         {

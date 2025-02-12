@@ -28,10 +28,27 @@ public class DeleteFileCommandRequestHandler:IRequestHandler<DeleteFileCommandRe
             };
         }
         var file = await _fileRepository.GetByIdAsync(request.Id);
-       
-       return new GeneralResponse<DeleteFileCommandResponse>()
-       {
-           Message = "Dosya silindi"
-       };
+
+        if (file == null)
+        {
+            return new GeneralResponse<DeleteFileCommandResponse>
+            {
+                Data = null,
+                Errors = new List<string> { "Kullanıcı bulunamadı." },
+                isSuccess = false
+            };
+        }
+
+        await _fileRepository.DeleteAsync(file.BaseID);
+
+        return new GeneralResponse<DeleteFileCommandResponse>
+        {
+            Data = new DeleteFileCommandResponse
+            {
+                UserId = file.BaseID,
+            },
+            Errors = null,
+            isSuccess = true
+        };
     }
 }

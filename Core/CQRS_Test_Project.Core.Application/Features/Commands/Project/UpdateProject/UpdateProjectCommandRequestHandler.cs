@@ -30,19 +30,28 @@ public class UpdateProjectCommandRequestHandler: IRequestHandler<UpdateProjectCo
                 Errors = new List<string> {""+validationResult.Errors}
             };
         }
-        var project = await _projectRepository.GetByIdAsync(request.Id);
-        if (project == null)
+        var user = await _projectRepository.GetByIdAsync(request.Id);
+        if (user is null)
         {
-            return new GeneralResponse<UpdateProjectCommandResponse>()
+            return new GeneralResponse<UpdateProjectCommandResponse>
             {
-                Message = "Project Bulunamadı",
+                Data = null,
+                Errors = new List<string> { "Kullanıcı bulunamadı." },
+                isSuccess = false
             };
         }
-        var updateProjectCommandResponse = _mapper.Map<Domain.Entities.Project>(project);
-        _projectRepository.UpdateAsync(updateProjectCommandResponse);
-        return new GeneralResponse<UpdateProjectCommandResponse>()
+            
+        _mapper.Map(request, user);
+        await _projectRepository.UpdateAsync(user);
+
+        return new GeneralResponse<UpdateProjectCommandResponse>
         {
-            Message = "Updated Project",
+            Data = new UpdateProjectCommandResponse
+            {
+                Message = "Proje başarıyla güncellendi."
+            },
+            Errors = null,
+            isSuccess = true
         };
     }
 }

@@ -31,7 +31,9 @@ public class CreateProjectCommandRequestHandler:IRequestHandler<CreateProjectCom
             };
         }
         var project = _mapper.Map<Domain.Entities.Project>(request);
-        _projectRepository.AddAsync(project);
+        
+        await _projectRepository.AddAsync(project);
+        
         return new GeneralResponse<CreateProjectCommandResponse>()
         {
             Errors = new List<string> { "başarıyla eklendi" }

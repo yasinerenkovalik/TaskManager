@@ -30,18 +30,28 @@ public class DeleteSubTaskCommandRequestHandler:IRequestHandler<DeleteSubTaskCom
                 Errors = new List<string> {""+validationResult.Errors}
             };
         }
-        var subTask = _subTaskRepository.GetByIdAsync(request.Id);
-        if (subTask is null)
+        var user = await _subTaskRepository.GetByIdAsync(request.Id);
+
+        if (user == null)
         {
-            return new GeneralResponse<DeleteSubTaskCommandResponse>()
+            return new GeneralResponse<DeleteSubTaskCommandResponse>
             {
-                Message = "Sub task not found",
+                Data = null,
+                Errors = new List<string> { "Kullanıcı bulunamadı." },
+                isSuccess = false
             };
         }
-        _subTaskRepository.DeleteAsync(request.Id);
-        return new GeneralResponse<DeleteSubTaskCommandResponse>()
+
+        await _subTaskRepository.DeleteAsync(user.BaseID);
+
+        return new GeneralResponse<DeleteSubTaskCommandResponse>
         {
-            Message = "Sub task deleted",
+            Data = new DeleteSubTaskCommandResponse
+            {
+                UserId = user.BaseID,
+            },
+            Errors = null,
+            isSuccess = true
         };
        
     }

@@ -2,5 +2,5 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.Project.DeletePro
 
 public class DeleteProjectCommandResponse
 {
-    
+    public Guid UserID { get; set; }
 }

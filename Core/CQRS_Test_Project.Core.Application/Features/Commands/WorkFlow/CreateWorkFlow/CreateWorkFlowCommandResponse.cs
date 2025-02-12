@@ -2,5 +2,5 @@ namespace CQRS_Test_Project.Core.Application.Features.Commands.WorkFlow.CreateWo
 
 public class CreateWorkFlowCommandResponse
 {
-    
+    public Guid Id { get; set; }
 }

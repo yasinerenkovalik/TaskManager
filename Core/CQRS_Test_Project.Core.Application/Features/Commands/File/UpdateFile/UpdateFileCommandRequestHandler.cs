@@ -24,11 +24,28 @@ public class UpdateFileCommandRequestHandler : IRequestHandler<UpdateFileCommand
     {
         
       
+        var user = await _fileRepository.GetByIdAsync(request.Id);
+        if (user is null)
+        {
+            return new GeneralResponse<UpdateFileCommandResponse>
+            {
+                Data = null,
+                Errors = new List<string> { "Kullanıcı bulunamadı." },
+                isSuccess = false
+            };
+        }
+            
+        _mapper.Map(request, user);
+        await _fileRepository.UpdateAsync(user);
+
         return new GeneralResponse<UpdateFileCommandResponse>
         {
-            Data = null,
-            Message =  "Kullanıcı bulunamadı." ,
-            isSuccess = false
+            Data = new UpdateFileCommandResponse
+            {
+                Message = "Kullanıcı başarıyla güncellendi."
+            },
+            Errors = null,
+            isSuccess = true
         };
     }
 }
