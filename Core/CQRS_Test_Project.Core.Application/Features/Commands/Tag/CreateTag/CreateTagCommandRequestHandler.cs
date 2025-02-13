@@ -10,13 +10,13 @@ public class CreateTagCommandRequestHandler:IRequestHandler<CreateTagCommandRequ
 {
     private readonly IMapper _mapper;
     private readonly IValidator<CreateTagCommandRequest> _validator;
-    private readonly IUserRepository _userRepository;
+    private readonly ITagRepository _tagRepository;
 
-    public CreateTagCommandRequestHandler(IMapper mapper, IValidator<CreateTagCommandRequest> validator, IUserRepository userRepository)
+    public CreateTagCommandRequestHandler(IMapper mapper, IValidator<CreateTagCommandRequest> validator, ITagRepository tagRepository)
     {
         _mapper = mapper;
         _validator = validator;
-        _userRepository = userRepository;
+        _tagRepository = tagRepository;
     }
 
     public async Task<GeneralResponse<CreateTagCommandResponse>> Handle(CreateTagCommandRequest request, CancellationToken cancellationToken)
@@ -34,10 +34,10 @@ public class CreateTagCommandRequestHandler:IRequestHandler<CreateTagCommandRequ
         }
 
        
-        var userEntity = _mapper.Map<CQRS_Test_Project.Core.Domain.Entities.User>(request);
+        var tagEntity = _mapper.Map<CQRS_Test_Project.Core.Domain.Entities.Tag>(request);
 
        
-        await _userRepository.AddAsync(userEntity);
+        await _tagRepository.AddAsync(tagEntity);
 
         
         return new  GeneralResponse<CreateTagCommandResponse>()

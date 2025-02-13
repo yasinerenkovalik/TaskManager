@@ -9,11 +9,11 @@ namespace CQRS_Test_Project.Core.Application.Validations.Task
     {
         public TaskValidator()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.Title)
                 .NotEmpty().WithMessage("Kullanıcı adı boş olamaz.")
                 .Length(3, 50).WithMessage("Kullanıcı adı 3 ile 50 karakter arasında olmalıdır.");
 
-            RuleFor(x => x.Name)
+            RuleFor(x => x.Title)
                 .NotEmpty().WithMessage("İsim alanı boş olamaz.")
                 .Length(3, 50).WithMessage("İsim alanı 3 ile 50 karakter arasında olmalıdır."); ;
 

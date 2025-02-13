@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CQRS_Test_Project.Core.Application.Features.Commands.SubTask.UpdateSubTag;
 
-public class UpdateSubTaskCommandRequestHandler:IRequestHandler<UpdateSubTaskCommandRequest,GeneralResponse< UpdateSubTaskCommandResponse>>
+public class UpdateSubTaskCommandRequestHandler : IRequestHandler<UpdateSubTaskCommandRequest, GeneralResponse<UpdateSubTaskCommandResponse>>
 {
     private readonly ISubTaskRepository _subTaskRepository;
     private readonly IMapper _mapper;
@@ -30,21 +30,28 @@ public class UpdateSubTaskCommandRequestHandler:IRequestHandler<UpdateSubTaskCom
                 Errors = new List<string> {""+validationResult.Errors}
             };
         }
-        var subTask= await _subTaskRepository.GetByIdAsync(request.Id);
-         
-        if (subTask == null)
+        var subTask = await _subTaskRepository.GetByIdAsync(request.Id);
+        if (subTask is null)
         {
-            return new GeneralResponse<UpdateSubTaskCommandResponse>()
+            return new GeneralResponse<UpdateSubTaskCommandResponse>
             {
-               Message = "Sub task not found",
+                Data = null,
+                Errors = new List<string> { "Kullanıcı bulunamadı." },
+                isSuccess = false
             };
         }
-        _subTaskRepository.UpdateAsync(subTask);
-        return new GeneralResponse<UpdateSubTaskCommandResponse>()
+            
+        _mapper.Map(request, subTask);
+        await _subTaskRepository.UpdateAsync(subTask);
+
+        return new GeneralResponse<UpdateSubTaskCommandResponse>
         {
-            Message = "Güncellendi"
+            Data = new UpdateSubTaskCommandResponse
+            {
+                Message = "Proje başarıyla güncellendi."
+            },
+            Errors = null,
+            isSuccess = true
         };
-        
     }
 }
-

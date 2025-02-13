@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CQRS_Test_Project.Core.Application.Features.Commands.Tag.DeleteTag;
 
-public class DeleteTagCommandRequestHandler:IRequestHandler<DeleteTagCommandRequest, GeneralResponse<DeleteUserCommandResponse>>
+public class DeleteTagCommandRequestHandler:IRequestHandler<DeleteTagCommandRequest, GeneralResponse<DeleteTagCommandResponse>>
 {
     private readonly IMapper _mapper;
     private readonly IValidator<DeleteTagCommandRequest> _validator;
@@ -20,22 +20,22 @@ public class DeleteTagCommandRequestHandler:IRequestHandler<DeleteTagCommandRequ
         _userRepository = userRepository;
     }
 
-    public async Task<GeneralResponse<DeleteUserCommandResponse>> Handle(DeleteTagCommandRequest request, CancellationToken cancellationToken)
+    public async Task<GeneralResponse<DeleteTagCommandResponse>> Handle(DeleteTagCommandRequest request, CancellationToken cancellationToken)
     {
         var validationResult = await _validator.ValidateAsync(request);
 
         if (!validationResult.IsValid)
         {
-            return new GeneralResponse<DeleteUserCommandResponse>
+            return new GeneralResponse<DeleteTagCommandResponse>
             {
                 Message = validationResult.Errors.ToString(), 
             };
         }
-        var user = await _userRepository.GetByIdAsync(request.Id);
+        var tag = await _userRepository.GetByIdAsync(request.Id);
 
-        if (user == null)
+        if (tag == null)
         {
-            return new GeneralResponse<DeleteUserCommandResponse>
+            return new GeneralResponse<DeleteTagCommandResponse>
             {
                 Data = null,
                 Errors = new List<string> { "Kullanıcı bulunamadı." },
@@ -43,13 +43,13 @@ public class DeleteTagCommandRequestHandler:IRequestHandler<DeleteTagCommandRequ
             };
         }
 
-        await _userRepository.DeleteAsync(user.BaseID);
+        await _userRepository.DeleteAsync(tag.BaseID);
 
-        return new GeneralResponse<DeleteUserCommandResponse>
+        return new GeneralResponse<DeleteTagCommandResponse>
         {
-            Data = new DeleteUserCommandResponse
+            Data = new DeleteTagCommandResponse
             {
-                UserId = user.BaseID,
+                Id = tag.BaseID,
             },
             Errors = null,
             isSuccess = true
