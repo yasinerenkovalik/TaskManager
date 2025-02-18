@@ -4,6 +4,7 @@ using CQRS_Test_Project.Core.Application.Features.Commands.User.UpdateUser;
 using CQRS_Test_Project.Core.Application.Features.Queries.User.GetAllUser;
 using CQRS_Test_Project.Core.Application.Features.Queries.User.GetByIdUser;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
@@ -18,8 +19,9 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         {
             _mediator = mediator;
         }
-
+       
         [HttpPost]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommandRequest request)
         {
           

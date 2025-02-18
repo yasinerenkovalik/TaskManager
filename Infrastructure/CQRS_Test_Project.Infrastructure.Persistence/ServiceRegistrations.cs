@@ -22,6 +22,7 @@ public static class ServiceRegistrations
         services.AddScoped<ITeamRepository, TeamRepository>();
         services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
         services.AddScoped<IWorkflowRepository, WorkFlowRepository>();
+        services.AddScoped<IAuthRepository, AuthRepository>();
            
         return services;
     }
