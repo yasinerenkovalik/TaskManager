@@ -33,11 +33,11 @@ namespace CQRS_Test_Project.Core.Application.Features.Queries.User.GetByIdUser
             }
 
             // AutoMapper ile kullanıcı verisini response modeline map et
-            var getByIdUserQueryResponse = _mapper.Map<GetByIdUserQueryResponse>(userEntity);
+            var getByIdFeedBackQueryResponse = _mapper.Map<GetByIdUserQueryResponse>(userEntity);
 
             return new GeneralResponse<GetByIdUserQueryResponse>
             {
-                Data = getByIdUserQueryResponse,
+                Data = getByIdFeedBackQueryResponse,
                 Errors = null,
                 isSuccess = true
             };

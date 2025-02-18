@@ -10,21 +10,13 @@ using System.Threading.Tasks;
 
 namespace CQRS_Test_Project.Core.Application.Features.Queries.User.GetAllUser
 {
-    public class GetAllUserQueryRequestHandler : IRequestHandler<GetAllUserQueryRequest, GeneralResponse<List<GetAllUserQueryResponse>>>
+    public class GetAllUserQueryRequestHandler(IUserRepository userRepository, IMapper mapper)
+        : IRequestHandler<GetAllUserQueryRequest, GeneralResponse<List<GetAllUserQueryResponse>>>
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
-
-        public GetAllUserQueryRequestHandler(IUserRepository userRepository, IMapper mapper)
-        {
-            _userRepository = userRepository;
-            _mapper = mapper;
-        }
-
         public async Task<GeneralResponse<List<GetAllUserQueryResponse>>> Handle(GetAllUserQueryRequest request, CancellationToken cancellationToken)
         {
            
-            var userEntities = await _userRepository.GetAllAysnc();
+            var userEntities = await userRepository.GetAllAysnc();
 
             if (userEntities == null || !userEntities.Any())
             {
@@ -37,7 +29,7 @@ namespace CQRS_Test_Project.Core.Application.Features.Queries.User.GetAllUser
             }
 
            
-            var getAllUserQueryResponse = _mapper.Map<List<GetAllUserQueryResponse>>(userEntities);
+            var getAllUserQueryResponse = mapper.Map<List<GetAllUserQueryResponse>>(userEntities);
 
             return new GeneralResponse<List<GetAllUserQueryResponse>>
             {

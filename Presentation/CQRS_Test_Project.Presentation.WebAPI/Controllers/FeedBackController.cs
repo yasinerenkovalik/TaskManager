@@ -1,6 +1,9 @@
 using CQRS_Test_Project.Core.Application.Features.Commands.FeedBack.CreateFeedBack;
 using CQRS_Test_Project.Core.Application.Features.Commands.FeedBack.DeleteFeedBack;
 using CQRS_Test_Project.Core.Application.Features.Commands.FeedBack.UpdateFeedBack;
+using CQRS_Test_Project.Core.Application.Features.Queries.FeedBack.GetAllFeedBack;
+using CQRS_Test_Project.Core.Application.Features.Queries.FeedBack.GetByIdFeedBack;
+using CQRS_Test_Project.Core.Application.Features.Queries.User.GetAllUser;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +53,24 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateFeedBackCommandRequest request)
         {
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
+
+        }
+        [HttpGet("GetAllFeedBacks")]
+        public async Task<IActionResult> GetAllFeedBacks()
+        {
+          
+            var result = await _mediator.Send(new GetAllFeedBackQueryRequest());
+            if (result.isSuccess)
+                return Ok(result);
+            return NotFound(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetFeedBackById([FromQuery] GetByIdFeedBackQueyRequest request)
+        {
+          
             var result = await _mediator.Send(request);
 
             return Ok(result);

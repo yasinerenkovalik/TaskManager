@@ -48,7 +48,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("getbyid")]
         public async Task<IActionResult> GetUserById([FromQuery] GetByIdUserQueryRequest request)
         {
           

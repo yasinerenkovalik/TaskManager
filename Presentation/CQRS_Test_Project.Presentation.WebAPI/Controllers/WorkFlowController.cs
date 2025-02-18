@@ -9,20 +9,13 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WorkFlowController : ControllerBase
+    public class WorkFlowController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-
-        public WorkFlowController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateWorkFlow([FromBody] CreateWorkFlowCommandRequest request)
         {
 
-            var result = await _mediator.Send(request);
+            var result = await mediator.Send(request);
 
             return Ok(result);
 
@@ -31,7 +24,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateWorkFlow([FromBody] UpdateWorkFlowCommandRequest request)
         {
-            var result = await _mediator.Send(request);
+            var result = await mediator.Send(request);
 
             return Ok(result);
 
@@ -47,7 +40,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
             };
 
 
-            var response = await _mediator.Send(command);
+            var response = await mediator.Send(command);
 
             if (response.isSuccess)
             {

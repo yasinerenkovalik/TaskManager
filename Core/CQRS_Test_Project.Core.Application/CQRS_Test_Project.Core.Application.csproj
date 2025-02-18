@@ -25,4 +25,11 @@
     <ProjectReference Include="..\CQRS_Test_Project.Core.Domain\CQRS_Test_Project.Core.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Queries\File\" />
+    <Folder Include="Features\Queries\Project\" />
+    <Folder Include="Features\Queries\SubTask\" />
+    <Folder Include="Features\Queries\Tag\" />
+  </ItemGroup>
+
 </Project>
