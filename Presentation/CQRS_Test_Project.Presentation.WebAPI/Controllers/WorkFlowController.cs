@@ -1,6 +1,7 @@
 using CQRS_Test_Project.Core.Application.Features.Commands.WorkFlow.CreateWorkFlow;
 using CQRS_Test_Project.Core.Application.Features.Commands.WorkFlow.DeleteWorkFlow;
 using CQRS_Test_Project.Core.Application.Features.Commands.WorkFlow.UpdateWorkFlow;
+using CQRS_Test_Project.Core.Application.Features.Queries.WorkFlow.GetAllWorkFlow;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +51,16 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
             {
                 return NotFound(response.Errors);
             }
+        }
+        [HttpGet("GetAllWorkFlows")]
+       
+        public async Task<IActionResult> GetAllUsers()
+        {
+          
+            var result = await mediator.Send(new GetAllWorkFlowQueryRequest());
+            if (result.isSuccess)
+                return Ok(result);
+            return NotFound(result);
         }
     
     }

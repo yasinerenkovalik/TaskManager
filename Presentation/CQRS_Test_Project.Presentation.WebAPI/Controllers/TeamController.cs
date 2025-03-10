@@ -1,6 +1,7 @@
 using CQRS_Test_Project.Core.Application.Features.Commands.Team.CreateTeam;
 using CQRS_Test_Project.Core.Application.Features.Commands.Team.DeleteTeam;
 using CQRS_Test_Project.Core.Application.Features.Commands.Team.UpdateTeam;
+using CQRS_Test_Project.Core.Application.Features.Queries.Team.GetAllTeam;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,15 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
             {
                 return NotFound(response.Errors);
             }
+        }
+        [HttpGet("GetAllTeam")]
+        public async Task<IActionResult> GetAllProject()
+        {
+          
+            var result = await _mediator.Send(new GetAllTeamQueryRequest());
+            if (result.isSuccess)
+                return Ok(result);
+            return NotFound(result);
         }
     }
 }
