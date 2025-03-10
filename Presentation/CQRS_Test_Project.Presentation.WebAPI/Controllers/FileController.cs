@@ -3,6 +3,7 @@ using CQRS_Test_Project.Core.Application.Features.Commands.FeedBack.UpdateFeedBa
 using CQRS_Test_Project.Core.Application.Features.Commands.File.CreateFile;
 using CQRS_Test_Project.Core.Application.Features.Commands.File.DeleteFile;
 using CQRS_Test_Project.Core.Application.Features.Commands.File.UpdateFile;
+using CQRS_Test_Project.Core.Application.Features.Queries.File.GetAllFile;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,15 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
             {
                 return NotFound(response.Errors); 
             }
+        }
+        [HttpGet("GetAllFile")]
+        public async Task<IActionResult> GetAllProject()
+        {
+          
+            var result = await _mediator.Send(new GetAllFileQueryRequest());
+            if (result.isSuccess)
+                return Ok(result);
+            return NotFound(result);
         }
     }
 }

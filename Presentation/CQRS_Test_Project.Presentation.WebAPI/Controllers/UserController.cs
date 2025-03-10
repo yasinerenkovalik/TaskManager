@@ -51,6 +51,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> GetUserById([FromQuery] GetByIdUserQueryRequest request)
         {
           
@@ -60,6 +61,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
 
         }
         [HttpGet("GetAllUsers")]
+        [Authorize(Policy = "AdminPolicy")]
         public async Task<IActionResult> GetAllUsers()
         {
           
