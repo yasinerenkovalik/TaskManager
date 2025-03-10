@@ -28,13 +28,9 @@
   <ItemGroup>
     <Folder Include="Features\Queries\SubTask\GetByIdSubTask\" />
     <Folder Include="Features\Queries\Tag\GetByIdTag\" />
-    <Folder Include="Features\Queries\Task\GetAllTask\" />
     <Folder Include="Features\Queries\Task\GetByIdTask\" />
-    <Folder Include="Features\Queries\TeamMember\GetAllTeamMember\" />
     <Folder Include="Features\Queries\TeamMember\GetByIdTeamMember\" />
-    <Folder Include="Features\Queries\Team\GetAllTeam\" />
     <Folder Include="Features\Queries\Team\GetByIdTeam\" />
-    <Folder Include="Features\Queries\WorkFlow\GetAllWorkFlow\" />
     <Folder Include="Features\Queries\WorkFlow\GetByIdWorkFlow\" />
   </ItemGroup>
 

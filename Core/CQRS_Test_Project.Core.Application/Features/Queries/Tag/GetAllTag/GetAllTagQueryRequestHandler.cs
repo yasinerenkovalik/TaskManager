@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CQRS_Test_Project.Core.Application.Features.Queries.Tag.GetAllTag;
 
-public class GeAllTagQueryRequestHandler(ITagRepository tagRepository, IMapper mapper):IRequestHandler<GetAllTagQueryRequest, GeneralResponse<List<GetAllTagQueryResponse>>>
+public class GetAllTagQueryRequestHandler(ITagRepository tagRepository, IMapper mapper):IRequestHandler<GetAllTagQueryRequest, GeneralResponse<List<GetAllTagQueryResponse>>>
 {
     private readonly ITagRepository _tagRepository = tagRepository;
     private readonly IMapper _mapper = mapper;
