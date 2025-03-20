@@ -15,15 +15,9 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // 'Guid' türlerini 'uuid' olarak tanımlıyoruz
+            
             modelBuilder.Entity<Task>()
                 .Property(t => t.BaseID);
-
-
-
-
-            // Diğer entity'ler için de aynı şeyi yapabilirsiniz
         }
 
         public DbSet<User> Users { get; set; }
