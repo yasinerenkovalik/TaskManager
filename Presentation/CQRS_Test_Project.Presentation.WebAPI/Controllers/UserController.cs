@@ -21,7 +21,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         }
        
         [HttpPost]
-        [Authorize(Policy = "AdminPolicy")]
+        
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommandRequest request)
         {
           
@@ -61,7 +61,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
 
         }
         [HttpGet("GetAllUsers")]
-        [Authorize(Policy = "AdminPolicy")]
+       
         public async Task<IActionResult> GetAllUsers()
         {
           

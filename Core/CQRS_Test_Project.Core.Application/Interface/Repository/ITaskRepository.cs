@@ -4,5 +4,5 @@ using CQRS_Test_Project.Core.Domain.Entities;
 
 public interface ITaskRepository:IGenericRepository<Task>
 {
-    
+    Task<List<Task>> GetByUserTask(Guid Id);
 }

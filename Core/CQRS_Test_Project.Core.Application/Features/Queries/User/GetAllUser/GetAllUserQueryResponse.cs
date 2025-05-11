@@ -9,7 +9,7 @@ namespace CQRS_Test_Project.Core.Application.Features.Queries.User.GetAllUser
     //burasını düzenle
     public class GetAllUserQueryResponse
     {
-        public Guid Id { get; set; }
+        public Guid BaseId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime? CreatedAt { get; set; }

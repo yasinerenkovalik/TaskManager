@@ -1,8 +1,6 @@
-using CQRS_Test_Project.Core.Domain.Entities.Base;
+namespace CQRS_Test_Project.Core.Application.Features.Queries.Task.GetByUserIdTask;
 
-namespace CQRS_Test_Project.Core.Domain.Entities;
-
-public class Task:BaseEntity
+public class GetByUserIdTaskQuertResponse
 {
     public string Title { get; set; }
     public string Description { get; set; }

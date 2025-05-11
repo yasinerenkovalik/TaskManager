@@ -45,7 +45,7 @@ public class LoginAuthRequestHandler : IRequestHandler<LoginAuthRequest, General
             {
                 Token = result
             },
-            Errors = new List<string>(), // Hata mesajı gereksiz
+            Errors = new List<string>(), 
             isSuccess = true
         };
     }

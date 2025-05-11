@@ -2,6 +2,7 @@ namespace CQRS_Test_Project.Core.Application.Features.Queries.Project.GetAllProj
 
 public class GetAllProjectQueryResponse
 {
+    public Guid BaseId { get; set; }
     public Guid UserId { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }

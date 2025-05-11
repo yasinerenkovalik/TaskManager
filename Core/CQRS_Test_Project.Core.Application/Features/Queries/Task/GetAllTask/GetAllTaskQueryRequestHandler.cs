@@ -7,11 +7,9 @@ namespace CQRS_Test_Project.Core.Application.Features.Queries.Task.GetAllTask;
 
 public class GetAllTaskQueryRequestHandler(ITaskRepository taskRepository, IMapper mapper):IRequestHandler<GetAllTaskQueryRequest, GeneralResponse<List<GetAllTaskQueryResponse>>>
 {
-    private readonly ITaskRepository _taskRepository = taskRepository;
-    private readonly IMapper _mapper = mapper;
     public async Task<GeneralResponse<List<GetAllTaskQueryResponse>>> Handle(GetAllTaskQueryRequest request, CancellationToken cancellationToken)
     {
-        var taskEntity = await _taskRepository.GetAllAysnc();
+        var taskEntity = await taskRepository.GetAllAysnc();
 
         if (taskEntity == null)
         {
@@ -23,7 +21,7 @@ public class GetAllTaskQueryRequestHandler(ITaskRepository taskRepository, IMapp
             };
         }
         
-        var getAllProjectQueryResponse = _mapper.Map<List<GetAllTaskQueryResponse>>(taskEntity);
+        var getAllProjectQueryResponse = mapper.Map<List<GetAllTaskQueryResponse>>(taskEntity);
 
         return new GeneralResponse<List<GetAllTaskQueryResponse>>
         {

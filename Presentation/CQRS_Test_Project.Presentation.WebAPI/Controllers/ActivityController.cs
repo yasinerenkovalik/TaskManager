@@ -19,7 +19,7 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         {
             _mediator = mediator;
         }
-
+        
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllActivities()
         {

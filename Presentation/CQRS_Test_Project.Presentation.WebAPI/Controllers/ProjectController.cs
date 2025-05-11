@@ -2,6 +2,7 @@ using CQRS_Test_Project.Core.Application.Features.Commands.Project.CreateProject
 using CQRS_Test_Project.Core.Application.Features.Commands.Project.DeleteProject;
 using CQRS_Test_Project.Core.Application.Features.Commands.Project.UpdateProject;
 using CQRS_Test_Project.Core.Application.Features.Queries.Project.GetAllProject;
+using CQRS_Test_Project.Core.Application.Features.Queries.Project.GetByIdProject;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,20 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         {
           
             var result = await _mediator.Send(new GetAllProjectQueryRequest());
+            if (result.isSuccess)
+                return Ok(result);
+            return NotFound(result);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdProject(Guid id)
+        {
+            var project = new GetByIdProjectQueryRequest()
+            {
+                Id = id
+            };
+
+          
+            var result = await _mediator.Send(project);
             if (result.isSuccess)
                 return Ok(result);
             return NotFound(result);
