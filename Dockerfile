@@ -1,21 +1,27 @@
-# Bu, .NET SDK'sının en son sürümünü içeren bir build imajıdır.
+# Build imajı
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
-# Çözüm dosyasını kopyalayın ve bağımlılıkları geri yükleyin
+# Çözüm dosyasını kopyalayın
 COPY *.sln ./
-COPY */*.csproj ./
+
+# Katman klasörlerini ve proje dosyalarını kopyalayın
+COPY Core ./Core
+COPY Infrastructure ./Infrastructure
+COPY Presentation ./Presentation
+
+# Bağımlılıkları geri yükleyin
 RUN dotnet restore
 
-# Tüm kaynak kodunu kopyalayın
+# Tüm kaynak kodunu kopyalayın (restore işleminden sonra)
 COPY . ./
 
-# Web projesini yayınlayın (Presentation katmanınızın olduğu dizin)
-WORKDIR /app/Presentation/CQRS_Test_Project.Presentation
+# Web projesini yayınlayın
+WORKDIR /app/Presentation/CQRS_Test_Project.Presentation.WebAPI
 RUN dotnet publish -c Release -o /app/out
 
-# Bu, yalnızca çalışma zamanını içeren daha küçük bir imajdır.
+# Çalışma zamanı imajı
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out ./
-ENTRYPOINT ["dotnet", "CQRS_Test_Project.Presentation.dll"]
+ENTRYPOINT ["dotnet", "CQRS_Test_Project.Presentation.WebAPI.dll"]
