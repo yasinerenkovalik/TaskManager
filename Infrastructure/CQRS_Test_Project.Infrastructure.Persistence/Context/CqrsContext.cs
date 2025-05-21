@@ -9,7 +9,7 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Server=localhost;Database=cqrsProject;User Id=admin;Password=password;TrustServerCertificate=True;");
+            optionsBuilder.UseNpgsql("Server=dpg-d0l461buibrs73a0sjpg-a.oregon-postgres.render.com;Database=taskmanager_flx4;User Id=taskmanager_flx4_user;Password=M2wc9dwLVJgf47dLegk7bn2OetGFMquV;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
