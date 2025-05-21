@@ -29,6 +29,7 @@ namespace CQRS_Test_Project.Infrastructure.Persistence.Context
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TaskTag> TaskTags { get; set; }
+        public DbSet<Efor> Efors { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<Workflow> Workflows { get; set; }

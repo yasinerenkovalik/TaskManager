@@ -13,10 +13,9 @@ public class TaskRepository:GenericRepository<Task>,ITaskRepository
         _context = appContext;
     }
 
-    public async Task<List<Task>> GetByUserTask(Guid Id)
+
+    public Task<List<Task>> GetByProject(Guid projectId)
     {
-        return await _context.Tasks
-            .Where(t => t.UserId == Id)
-            .ToListAsync();
+        return _context.Tasks.Where(x => x.ProjectId == projectId).ToListAsync();
     }
 }

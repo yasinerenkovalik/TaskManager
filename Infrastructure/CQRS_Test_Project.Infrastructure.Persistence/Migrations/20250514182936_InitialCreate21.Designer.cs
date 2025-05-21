@@ -3,6 +3,7 @@ using System;
 using CQRS_Test_Project.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CQRS_Test_Project.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(CqrsContext))]
-    partial class CqrsContextModelSnapshot : ModelSnapshot
+    [Migration("20250514182936_InitialCreate21")]
+    partial class InitialCreate21
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

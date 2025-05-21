@@ -3,6 +3,8 @@ using CQRS_Test_Project.Core.Application.Features.Commands.SubTask.CreateSubTag;
 using CQRS_Test_Project.Core.Application.Features.Commands.SubTask.DeleteSubTag;
 using CQRS_Test_Project.Core.Application.Features.Commands.SubTask.UpdateSubTag;
 using CQRS_Test_Project.Core.Application.Features.Queries.SubTask.GetAllSubTask;
+using CQRS_Test_Project.Core.Application.Features.Queries.SubTask.GetByIdSubTask;
+using CQRS_Test_Project.Core.Application.Features.Queries.SubTask.GetByTaskSubTask;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -65,6 +67,30 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
         {
           
             var result = await _mediator.Send(new GetAllSubTaskQueryRequest());
+            if (result.isSuccess)
+                return Ok(result);
+            return NotFound(result);
+        }
+        [HttpGet("GetByIdSubTasks")]
+        public async Task<IActionResult> GetByIdSubTasks(Guid id)
+        {
+          
+            var result = await _mediator.Send(new GetByIdSubTaskRequest
+            {
+                Id = id
+            });
+            if (result.isSuccess)
+                return Ok(result);
+            return NotFound(result);
+        }
+        [HttpGet("GetByTaskSubTasks")]
+        public async Task<IActionResult> GetByTaskSubTasks(Guid id)
+        {
+          
+            var result = await _mediator.Send(new GetByTaskSubTaskRequest()
+            { 
+                TaskId= id
+            });
             if (result.isSuccess)
                 return Ok(result);
             return NotFound(result);

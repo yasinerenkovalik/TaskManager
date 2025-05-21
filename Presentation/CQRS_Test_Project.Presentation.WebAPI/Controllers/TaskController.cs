@@ -4,7 +4,7 @@ using CQRS_Test_Project.Core.Application.Features.Commands.Task.CreateTask;
 using CQRS_Test_Project.Core.Application.Features.Commands.Task.DeleteTask;
 using CQRS_Test_Project.Core.Application.Features.Commands.Task.UpdateTask;
 using CQRS_Test_Project.Core.Application.Features.Queries.Task.GetAllTask;
-using CQRS_Test_Project.Core.Application.Features.Queries.Task.GetByUserIdTask;
+using CQRS_Test_Project.Core.Application.Features.Queries.Task.GetByProjectTask;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -71,15 +71,19 @@ namespace CQRS_Test_Project.Presentation.WebAPI.Controllers
                 return Ok(result);
             return NotFound(result);
         }
-        [HttpGet("GetByUserTask")]
-        public async Task<IActionResult> GetByUserTask([FromQuery] GetByUserIdTaskQuertRequest request)
+        [HttpGet("GetByProjectTask")]
+        public async Task<IActionResult> GetByProjectTask(Guid projectId)
         {
           
-            var result = await _mediator.Send(request);
-
-            return Ok(result);
-
+            var result = await _mediator.Send(new GetByProjectTaskRequest
+            {
+                ProjectId = projectId
+            });
+            if (result.isSuccess)
+                return Ok(result);
+            return NotFound(result);
         }
+    
      
     }
 }

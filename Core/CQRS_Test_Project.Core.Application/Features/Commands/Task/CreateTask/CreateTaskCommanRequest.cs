@@ -9,5 +9,5 @@ public class CreateTaskCommanRequest:IRequest<GeneralResponse<CreateTaskCommanRe
     public string Priority { get; set; }
     public string Status { get; set; }
     public Guid ProjectId { get; set; }
-    public Guid UserId { get; set; }
+
 }
